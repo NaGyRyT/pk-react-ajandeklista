@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/pk-react-ajandeklista/static/css/main.b2aa071c.css",
+    "main.js": "/pk-react-ajandeklista/static/js/main.6f0e8d85.js",
+    "index.html": "/pk-react-ajandeklista/index.html",
+    "main.b2aa071c.css.map": "/pk-react-ajandeklista/static/css/main.b2aa071c.css.map",
+    "main.6f0e8d85.js.map": "/pk-react-ajandeklista/static/js/main.6f0e8d85.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b2aa071c.css",
+    "static/js/main.6f0e8d85.js"
+  ]
+}
