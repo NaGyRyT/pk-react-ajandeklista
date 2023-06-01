@@ -60,6 +60,35 @@ function App() {
 
   };
 
+  function findIndexById(list, id){
+    for (let i = 0; i < list.length; i++){
+      if (String(list[i].id) === String(id)){
+        return i;
+      }
+     
+    }
+    return null;
+
+  }
+
+  function mozgat(id, irány){
+    const ajándékLista = [...state.ajándékLista]
+    const currentIndex = findIndexById(ajándékLista, id);
+    const határ = irány === -1 ? 0 : ajándékLista.length -1
+    if (currentIndex === null || currentIndex === határ){
+      return;
+    }
+    const otherIndex  = currentIndex + irány;
+    const swap = ajándékLista[otherIndex];
+    ajándékLista[otherIndex] = ajándékLista[currentIndex];
+    ajándékLista[currentIndex] = swap;
+    setState({
+      ajándékLista,
+      nextId: state.nextId
+    })
+  }
+
+  
   function törölAjándék(id) {
     const ajándékLista = 
       state.ajándékLista.filter(ajándék => String(ajándék.id) !==id)
@@ -89,6 +118,7 @@ function App() {
       <Űrlap felveszAjándék={felveszAjándék}/>  
       <Lista
         lista={state.ajándékLista} 
+        mozgat={mozgat}
         törölAjándék={törölAjándék}
         toggleKihúzAjándék={toggleKihúzAjándék}
         elrejtKihúzott={elrejtKihúzott}

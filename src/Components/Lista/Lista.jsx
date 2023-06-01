@@ -10,6 +10,14 @@ export default function Lista(props) {
         props.törölAjándék(e.target.dataset.id);
     }
 
+    const fel = (e) => {
+      props.mozgat(e.target.dataset.id, -1);
+    }
+
+    const le = (e) => {
+      props.mozgat(e.target.dataset.id, 1);
+    }
+
     const jsxLista = props
         .lista
         .filter(elem => !props.elrejtKihúzott || elem.kihúzva === false)
@@ -20,6 +28,8 @@ export default function Lista(props) {
               {elem.kihúzva ? "Visszaállít" : "Kihúzás"}
             </button>
             <button onClick={töröl} data-id={elem.id}>Törlés</button>
+            <button onClick={fel} data-id={elem.id}>Fel</button>
+            <button onClick={le} data-id={elem.id}>Le</button>
         </li>
     ))
   return (
