@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/pk-react-ajandeklista/static/css/main.c30a85ff.css",
-    "main.js": "/pk-react-ajandeklista/static/js/main.179f46a1.js",
+    "main.js": "/pk-react-ajandeklista/static/js/main.e01a33f9.js",
     "index.html": "/pk-react-ajandeklista/index.html",
     "main.c30a85ff.css.map": "/pk-react-ajandeklista/static/css/main.c30a85ff.css.map",
-    "main.179f46a1.js.map": "/pk-react-ajandeklista/static/js/main.179f46a1.js.map"
+    "main.e01a33f9.js.map": "/pk-react-ajandeklista/static/js/main.e01a33f9.js.map"
   },
   "entrypoints": [
     "static/css/main.c30a85ff.css",
-    "static/js/main.179f46a1.js"
+    "static/js/main.e01a33f9.js"
   ]
 }
