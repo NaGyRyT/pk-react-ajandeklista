@@ -36,46 +36,52 @@ function App() {
     nextId: 4
   });
 
-function felveszAjándék(név, célszemély, ár, fontosság){
-  setState({
-    ajándékLista: [
-      ...state.ajándékLista,
-      {
-        név,
-        célszemély,
-        ár,
-        fontosság,
-        kihúzva: false,
-        id: state.nextId }
-    ],
-    nextId: state.nextId + 1  
-  }  
-  )
+  const [elrejtKihúzott, setElrejtKihúzott] = useState(false);
 
-};
-
-function törölAjándék(id) {
-  const ajándékLista = 
-    state.ajándékLista.filter(ajándék => String(ajándék.id) !==id)
-  setState({
-    ajándékLista,
-    nextId: state.nextId
-  })
+  function toggleElrejtKihúzott(újÉrték){
+    setElrejtKihúzott(újÉrték)
   }
 
+  function felveszAjándék(név, célszemély, ár, fontosság){
+    setState({
+      ajándékLista: [
+        ...state.ajándékLista,
+        {
+          név,
+          célszemély,
+          ár,
+          fontosság,
+          kihúzva: false,
+          id: state.nextId }
+      ],
+      nextId: state.nextId + 1  
+    }  
+    )
 
-function toggleKihúzAjándék(id){
-  const ajándékLista = state.ajándékLista.map(ajándék => {
-    if (String(ajándék.id) === id){
-      ajándék.kihúzva = !ajándék.kihúzva;
+  };
+
+  function törölAjándék(id) {
+    const ajándékLista = 
+      state.ajándékLista.filter(ajándék => String(ajándék.id) !==id)
+    setState({
+      ajándékLista,
+      nextId: state.nextId
+    })
     }
-    return ajándék;
-  })
-  setState({
-    ajándékLista,
-    nextId: state.nextId
-  })
-}
+
+
+  function toggleKihúzAjándék(id){
+    const ajándékLista = state.ajándékLista.map(ajándék => {
+      if (String(ajándék.id) === id){
+        ajándék.kihúzva = !ajándék.kihúzva;
+      }
+      return ajándék;
+    })
+    setState({
+      ajándékLista,
+      nextId: state.nextId
+    })
+  }
 
   return (
     <div className="App">
@@ -85,8 +91,9 @@ function toggleKihúzAjándék(id){
         lista={state.ajándékLista} 
         törölAjándék={törölAjándék}
         toggleKihúzAjándék={toggleKihúzAjándék}
+        elrejtKihúzott={elrejtKihúzott}
         />
-      <Szűrő/>
+      <Szűrő toggleElrejtKihúzott={toggleElrejtKihúzott}/>
       </div>
     
   );
