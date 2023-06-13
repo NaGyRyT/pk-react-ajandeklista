@@ -8,11 +8,12 @@ import Űrlap from './Components/Űrlap/Űrlap';
 function App() {
   const [state, setState] = useState({
     ajándékLista: [{
-      név: 'Joghurt',
+      név: 'Spenót',
       célszemély: 'Popeye',
-      ár: 179,
-      fontosság: 85,
+      ár: '179',
+      fontosság: '20',
       kihúzva: false,
+      szerkesztés: false,
       id: 1
   },
   {
@@ -21,6 +22,7 @@ function App() {
       ár: '8000',
       fontosság: '85',
       kihúzva: false,
+      szerkesztés: false,
       id: 2
   },
   {
@@ -29,6 +31,7 @@ function App() {
       ár: '2990',
       fontosság: '90',
       kihúzva: false,
+      szerkesztés: false,
       id: 3
   }
 
@@ -42,23 +45,45 @@ function App() {
     setElrejtKihúzott(újÉrték)
   }
 
-  function felveszAjándék(név, célszemély, ár, fontosság){
-    setState({
-      ajándékLista: [
-        ...state.ajándékLista,
-        {
-          név,
-          célszemély,
-          ár,
-          fontosság,
-          kihúzva: false,
-          id: state.nextId }
-      ],
-      nextId: state.nextId + 1  
-    }  
-    )
+  function felveszAjándék(név, célszemély, ár, fontosság, szerkesztés, id){ 
+    if (id === "") {
+      setState({
+        ajándékLista: [
+          ...state.ajándékLista,
+          {
+            név,
+            célszemély,
+            ár,
+            fontosság,
+            kihúzva: false,
+            szerkesztés: false,
+            id: state.nextId
+          }
+        ],
+        nextId: state.nextId + 1  
+      })
+    } else {
+      const ajándékLista = 
+      state.ajándékLista.filter(ajándék => ajándék.id !==id)
+      setState({
+        ajándékLista: [
+          ...ajándékLista,
+          {
+            név,
+            célszemély,
+            ár,
+            fontosság,
+            kihúzva: false,
+            szerkesztés: false,
+            id
+          }
+        ],
+        nextId: state.nextId 
+      })
 
-  };
+    }
+
+    };
 
   function findIndexById(list, id){
     for (let i = 0; i < list.length; i++){
@@ -68,7 +93,6 @@ function App() {
      
     }
     return null;
-
   }
 
   function mozgat(id, irány){
@@ -88,7 +112,6 @@ function App() {
     })
   }
 
-  
   function törölAjándék(id) {
     const ajándékLista = 
       state.ajándékLista.filter(ajándék => String(ajándék.id) !==id)
@@ -98,13 +121,12 @@ function App() {
     })
     }
 
-
-  function toggleKihúzAjándék(id){
+  function toggleKihúzAjándék(id) {
     const ajándékLista = state.ajándékLista.map(ajándék => {
-      if (String(ajándék.id) === id){
+      if (String(ajándék.id) === id) {
         ajándék.kihúzva = !ajándék.kihúzva;
       }
-      return ajándék;
+      return ajándék
     })
     setState({
       ajándékLista,
@@ -112,13 +134,31 @@ function App() {
     })
   }
 
+  function szerkesztAjándék(id) {
+    const ajándékLista = state.ajándékLista.map(ajándék => {
+      if (String(ajándék.id) === id) {
+        ajándék.szerkesztés = !ajándék.szerkesztés;
+      } else ajándék.szerkesztés = false
+      return ajándék
+    })
+    setState({
+      ajándékLista,
+      nextId: state.nextId
+    }
+  )
+  }
+
   return (
     <div className="App">
       <h1>Ajándéklista</h1>
-      <Űrlap felveszAjándék={felveszAjándék}/>  
+      <Űrlap 
+      felveszAjándék={felveszAjándék}
+      lista = {state.ajándékLista}
+      />  
       <Lista
         lista={state.ajándékLista} 
         mozgat={mozgat}
+        szerkesztAjándék={szerkesztAjándék}
         törölAjándék={törölAjándék}
         toggleKihúzAjándék={toggleKihúzAjándék}
         elrejtKihúzott={elrejtKihúzott}
