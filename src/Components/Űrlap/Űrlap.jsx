@@ -12,7 +12,6 @@ export default function Űrlap(props) {
     
     const szerkesztésIgaz = props.lista.find( elem => elem.szerkesztés === true )
 
-    
     React.useEffect(() => {
         if (szerkesztésIgaz !== undefined) {
             setNév(szerkesztésIgaz.név)
